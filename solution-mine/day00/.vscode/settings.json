@@ -1,0 +1,4 @@
+{
+  "files.trimTrailingWhitespaceInRegexAndStrings": false,
+  "trailing-spaces.includeEmptyLines": false
+}
