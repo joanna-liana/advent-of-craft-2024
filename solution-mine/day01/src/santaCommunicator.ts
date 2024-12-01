@@ -19,7 +19,7 @@ export class SantaCommunicator {
         return `Dear ${reindeerName}, please return from ${currentLocation} in ${daysBeforeReturn} day(s) to be ready and rest before Christmas.`;
     }
 
-    public isOverdue(reindeerName: string, currentLocation: string, numbersOfDaysForComingBack: number, numberOfDaysBeforeChristmas: number): boolean {
+    public isOverdue({ currentLocation, numberOfDaysBeforeChristmas, numbersOfDaysForComingBack, reindeerName }: MessageData): boolean {
         if (this.daysBeforeReturn(numbersOfDaysForComingBack, numberOfDaysBeforeChristmas) <= 0) {
             this.logger.log(`Overdue for ${reindeerName} located ${currentLocation}.`);
             return true;
