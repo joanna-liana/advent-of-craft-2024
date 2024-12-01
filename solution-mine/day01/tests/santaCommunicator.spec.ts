@@ -15,7 +15,7 @@ describe('SantaCommunicator', () => {
         communicator = new SantaCommunicator(numberOfDaysToRest, logger);
     });
 
-    test('composeMessage', () => {
+    test('composes a message', () => {
         // given
         const messageData: ReindeerStatusData = {
             reindeerName: SantaCommunicatorSpec,
@@ -31,7 +31,7 @@ describe('SantaCommunicator', () => {
         expect(message).toEqual('Dear Dasher, please return from North Pole in 17 day(s) to be ready and rest before Christmas.');
     });
 
-    test('shouldDetectOverdueReindeer', () => {
+    test('detects an overdue reindeer', () => {
         // given
         const messageData: ReindeerStatusData = {
             reindeerName: SantaCommunicatorSpec,
@@ -48,7 +48,7 @@ describe('SantaCommunicator', () => {
         expect(logger.getLog()).toEqual('Overdue for Dasher located North Pole.');
     });
 
-    test('shouldReturnFalseWhenNoOverdue', () => {
+    test('detects a non-overdue reindeer', () => {
         // given
         const messageData: ReindeerStatusData = {
             reindeerName: SantaCommunicatorSpec,
