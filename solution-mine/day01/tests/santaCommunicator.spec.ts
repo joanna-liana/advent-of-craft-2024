@@ -32,8 +32,18 @@ describe('SantaCommunicator', () => {
     });
 
     test('shouldDetectOverdueReindeer', () => {
-        const overdue = communicator.isOverdue(SantaCommunicatorSpec, NORTH_POLE, numberOfDayBeforeChristmas, numberOfDayBeforeChristmas);
+        // given
+        const messageData: MessageData = {
+            reindeerName: SantaCommunicatorSpec,
+            currentLocation: NORTH_POLE,
+            numbersOfDaysForComingBack: numberOfDayBeforeChristmas,
+            numberOfDaysBeforeChristmas: numberOfDayBeforeChristmas
+        }
 
+        // when
+        const overdue = communicator.isOverdue(messageData);
+
+        // then
         expect(overdue).toBeTruthy();
         expect(logger.getLog()).toEqual('Overdue for Dasher located North Pole.');
     });
