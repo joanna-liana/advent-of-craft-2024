@@ -1,10 +1,13 @@
 import {Logger} from "./logger";
 
-export type ReindeerStatusData = {
-    reindeerName: string;
-    currentLocation: string;
+type DaysLeft = {
     numbersOfDaysForComingBack: number;
     numberOfDaysBeforeChristmas: number;
+}
+
+export type ReindeerStatusData = DaysLeft & {
+    reindeerName: string;
+    currentLocation: string;
 };
 
 export class SantaCommunicator {
@@ -15,19 +18,19 @@ export class SantaCommunicator {
     }
 
     public composeMessage({ currentLocation, numberOfDaysBeforeChristmas, numbersOfDaysForComingBack, reindeerName }: ReindeerStatusData): string {
-        const daysBeforeReturn = this.daysBeforeReturn(numbersOfDaysForComingBack, numberOfDaysBeforeChristmas);
+        const daysBeforeReturn = this.daysBeforeReturn({ numbersOfDaysForComingBack, numberOfDaysBeforeChristmas });
         return `Dear ${reindeerName}, please return from ${currentLocation} in ${daysBeforeReturn} day(s) to be ready and rest before Christmas.`;
     }
 
     public isOverdue({ currentLocation, numberOfDaysBeforeChristmas, numbersOfDaysForComingBack, reindeerName }: ReindeerStatusData): boolean {
-        if (this.daysBeforeReturn(numbersOfDaysForComingBack, numberOfDaysBeforeChristmas) <= 0) {
+        if (this.daysBeforeReturn({ numbersOfDaysForComingBack, numberOfDaysBeforeChristmas }) <= 0) {
             this.logger.log(`Overdue for ${reindeerName} located ${currentLocation}.`);
             return true;
         }
         return false;
     }
 
-    private daysBeforeReturn(numbersOfDaysForComingBack: number, numberOfDaysBeforeChristmas: number): number {
+    private daysBeforeReturn({ numbersOfDaysForComingBack, numberOfDaysBeforeChristmas }: DaysLeft): number {
         return numberOfDaysBeforeChristmas - numbersOfDaysForComingBack - this.numberOfDaysToRest;
     }
 }
