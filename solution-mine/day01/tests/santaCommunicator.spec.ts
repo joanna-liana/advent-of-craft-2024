@@ -49,7 +49,18 @@ describe('SantaCommunicator', () => {
     });
 
     test('shouldReturnFalseWhenNoOverdue', () => {
-        const overdue = communicator.isOverdue(SantaCommunicatorSpec, NORTH_POLE, numberOfDayBeforeChristmas - numberOfDaysToRest - 1, numberOfDayBeforeChristmas);
+        // given
+        const messageData: MessageData = {
+            reindeerName: SantaCommunicatorSpec,
+            currentLocation: NORTH_POLE,
+            numbersOfDaysForComingBack: numberOfDayBeforeChristmas - numberOfDaysToRest - 1,
+            numberOfDaysBeforeChristmas: numberOfDayBeforeChristmas
+        }
+
+        // when
+        const overdue = communicator.isOverdue(messageData);
+
+        // then
         expect(overdue).toBeFalsy();
     });
 });
