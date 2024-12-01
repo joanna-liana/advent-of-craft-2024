@@ -1,5 +1,12 @@
 import {Logger} from "./logger";
 
+export type MessageData = {
+    reindeerName: string;
+    currentLocation: string;
+    numbersOfDaysForComingBack: number;
+    numberOfDaysBeforeChristmas: number;
+};
+
 export class SantaCommunicator {
     private readonly numberOfDaysToRest: number;
 

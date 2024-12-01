@@ -1,17 +1,10 @@
-import {SantaCommunicator} from "../src/santaCommunicator";
+import {MessageData, SantaCommunicator} from "../src/santaCommunicator";
 import {TestLogger} from "./doubles/testLogger";
 
 const SantaCommunicatorSpec = 'Dasher';
 const NORTH_POLE = 'North Pole';
 const numberOfDaysToRest = 2;
 const numberOfDayBeforeChristmas = 24;
-
-type MessageData = {
-    reindeerName: string;
-    currentLocation: string;
-    numbersOfDaysForComingBack: number;
-    numberOfDaysBeforeChristmas: number;
-};
 
 describe('SantaCommunicator', () => {
     let communicator: SantaCommunicator;
