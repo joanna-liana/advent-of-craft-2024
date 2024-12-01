@@ -17,16 +17,18 @@ export class SantaCommunicator {
         this.numberOfDaysToRest = numberOfDaysToRest;
     }
 
-    public composeMessage({ currentLocation, numberOfDaysBeforeChristmas, numbersOfDaysForComingBack, reindeerName }: ReindeerStatusData): string {
-        const daysBeforeReturn = this.daysBeforeReturn({ numbersOfDaysForComingBack, numberOfDaysBeforeChristmas });
+    public composeMessage({ currentLocation, reindeerName, ...daysLeft }: ReindeerStatusData): string {
+        const daysBeforeReturn = this.daysBeforeReturn(daysLeft);
+
         return `Dear ${reindeerName}, please return from ${currentLocation} in ${daysBeforeReturn} day(s) to be ready and rest before Christmas.`;
     }
 
-    public isOverdue({ currentLocation, numberOfDaysBeforeChristmas, numbersOfDaysForComingBack, reindeerName }: ReindeerStatusData): boolean {
-        if (this.daysBeforeReturn({ numbersOfDaysForComingBack, numberOfDaysBeforeChristmas }) <= 0) {
+    public isOverdue({ currentLocation, reindeerName, ...daysLeft }: ReindeerStatusData): boolean {
+        if (this.daysBeforeReturn(daysLeft) <= 0) {
             this.logger.log(`Overdue for ${reindeerName} located ${currentLocation}.`);
             return true;
         }
+
         return false;
     }
 
