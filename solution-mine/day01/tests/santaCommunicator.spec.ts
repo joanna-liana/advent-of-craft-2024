@@ -1,4 +1,4 @@
-import {MessageData, SantaCommunicator} from "../src/santaCommunicator";
+import {ReindeerStatusData, SantaCommunicator} from "../src/santaCommunicator";
 import {TestLogger} from "./doubles/testLogger";
 
 const SantaCommunicatorSpec = 'Dasher';
@@ -17,7 +17,7 @@ describe('SantaCommunicator', () => {
 
     test('composeMessage', () => {
         // given
-        const messageData: MessageData = {
+        const messageData: ReindeerStatusData = {
             reindeerName: SantaCommunicatorSpec,
             currentLocation: NORTH_POLE,
             numbersOfDaysForComingBack: 5,
@@ -33,7 +33,7 @@ describe('SantaCommunicator', () => {
 
     test('shouldDetectOverdueReindeer', () => {
         // given
-        const messageData: MessageData = {
+        const messageData: ReindeerStatusData = {
             reindeerName: SantaCommunicatorSpec,
             currentLocation: NORTH_POLE,
             numbersOfDaysForComingBack: numberOfDayBeforeChristmas,
@@ -50,7 +50,7 @@ describe('SantaCommunicator', () => {
 
     test('shouldReturnFalseWhenNoOverdue', () => {
         // given
-        const messageData: MessageData = {
+        const messageData: ReindeerStatusData = {
             reindeerName: SantaCommunicatorSpec,
             currentLocation: NORTH_POLE,
             numbersOfDaysForComingBack: numberOfDayBeforeChristmas - numberOfDaysToRest - 1,
