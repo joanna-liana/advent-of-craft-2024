@@ -11,11 +11,10 @@ export type ReindeerStatusData = DaysLeft & {
 };
 
 export class SantaCommunicator {
-    private readonly numberOfDaysToRest: number;
-
-    constructor(numberOfDaysToRest: number, private readonly logger: Logger) {
-        this.numberOfDaysToRest = numberOfDaysToRest;
-    }
+    constructor(
+        private readonly numberOfDaysToRest: number,
+        private readonly logger: Logger
+    ) {}
 
     public composeMessage({ currentLocation, reindeerName, ...daysLeft }: ReindeerStatusData): string {
         const daysBeforeReturn = this.daysBeforeReturn(daysLeft);
