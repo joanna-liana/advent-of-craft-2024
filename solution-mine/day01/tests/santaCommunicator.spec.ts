@@ -21,14 +21,14 @@ describe('SantaCommunicator', () => {
     });
 
     test('shouldDetectOverdueReindeer', () => {
-        const overdue = communicator.isOverdue(SantaCommunicatorSpec, NORTH_POLE, numberOfDayBeforeChristmas, numberOfDayBeforeChristmas, logger);
+        const overdue = communicator.isOverdue(SantaCommunicatorSpec, NORTH_POLE, numberOfDayBeforeChristmas, numberOfDayBeforeChristmas);
 
         expect(overdue).toBeTruthy();
         expect(logger.getLog()).toEqual('Overdue for Dasher located North Pole.');
     });
 
     test('shouldReturnFalseWhenNoOverdue', () => {
-        const overdue = communicator.isOverdue(SantaCommunicatorSpec, NORTH_POLE, numberOfDayBeforeChristmas - numberOfDaysToRest - 1, numberOfDayBeforeChristmas, logger);
+        const overdue = communicator.isOverdue(SantaCommunicatorSpec, NORTH_POLE, numberOfDayBeforeChristmas - numberOfDaysToRest - 1, numberOfDayBeforeChristmas);
         expect(overdue).toBeFalsy();
     });
 });
