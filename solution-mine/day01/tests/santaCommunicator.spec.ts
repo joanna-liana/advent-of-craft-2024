@@ -4,7 +4,7 @@ import {TestLogger} from "./doubles/testLogger";
 const SantaCommunicatorSpec = 'Dasher';
 const NORTH_POLE = 'North Pole';
 const numberOfDaysToRest = 2;
-const numberOfDayBeforeChristmas = 24;
+const numberOfDaysBeforeChristmas = 24;
 
 describe('SantaCommunicator', () => {
     let communicator: SantaCommunicator;
@@ -21,7 +21,7 @@ describe('SantaCommunicator', () => {
             reindeerName: SantaCommunicatorSpec,
             currentLocation: NORTH_POLE,
             numbersOfDaysForComingBack: 5,
-            numberOfDaysBeforeChristmas: numberOfDayBeforeChristmas
+            numberOfDaysBeforeChristmas
         }
 
         // when
@@ -36,8 +36,8 @@ describe('SantaCommunicator', () => {
         const messageData: ReindeerStatusData = {
             reindeerName: SantaCommunicatorSpec,
             currentLocation: NORTH_POLE,
-            numbersOfDaysForComingBack: numberOfDayBeforeChristmas,
-            numberOfDaysBeforeChristmas: numberOfDayBeforeChristmas
+            numbersOfDaysForComingBack: numberOfDaysBeforeChristmas,
+            numberOfDaysBeforeChristmas
         }
 
         // when
@@ -53,8 +53,8 @@ describe('SantaCommunicator', () => {
         const messageData: ReindeerStatusData = {
             reindeerName: SantaCommunicatorSpec,
             currentLocation: NORTH_POLE,
-            numbersOfDaysForComingBack: numberOfDayBeforeChristmas - numberOfDaysToRest - 1,
-            numberOfDaysBeforeChristmas: numberOfDayBeforeChristmas
+            numbersOfDaysForComingBack: numberOfDaysBeforeChristmas - numberOfDaysToRest - 1,
+            numberOfDaysBeforeChristmas
         }
 
         // when
