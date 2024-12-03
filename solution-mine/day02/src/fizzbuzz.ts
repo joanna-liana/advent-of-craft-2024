@@ -5,9 +5,9 @@ export const max = 100;
 
 let mapping: Map<number, string> = new Map([
     [15, 'FizzBuzz'],
+    [7, 'Whizz'],
     [3, 'Fizz'],
     [5, 'Buzz'],
-    [7, 'Whizz'],
 ]);
 
 export const fizzbuzz = (input: number): Option<string> =>
