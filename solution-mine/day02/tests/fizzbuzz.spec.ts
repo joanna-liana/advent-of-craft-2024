@@ -21,8 +21,8 @@ describe('FizzBuzz should return', () => {
         // Multiples of 7 are Whizz
         // Multiples of 11 are Bang
         [7, 'Whizz'],
-        // [14, 'Whizz'],
-        // [21, 'Whizz'],
+        [14, 'Whizz'],
+        [21, 'Whizz'], // failing
         // [11, 'Bang'],
         // [22, 'Bang'],
         // [33, 'Bang'],
@@ -49,7 +49,7 @@ describe('FizzBuzz should return', () => {
         O.exists(result => validStringsFor(input).includes(result))
     );
 
-    const validStringsFor = (x: number): string[] => ['Fizz', 'Buzz', 'FizzBuzz', x.toString()];
+    const validStringsFor = (x: number): string[] => ['Fizz', 'Buzz', 'FizzBuzz', 'Whizz' x.toString()];
 
     test('none for numbers out of range', () => {
         fc.assert(
