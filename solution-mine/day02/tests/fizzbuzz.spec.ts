@@ -18,6 +18,14 @@ describe('FizzBuzz should return', () => {
         [15, 'FizzBuzz'],
         [30, 'FizzBuzz'],
         [45, 'FizzBuzz'],
+        // Multiples of 7 are Whizz
+        // Multiples of 11 are Bang
+        [7, 'Whizz'],
+        // [14, 'Whizz'],
+        // [21, 'Whizz'],
+        // [11, 'Bang'],
+        // [22, 'Bang'],
+        // [33, 'Bang'],
     ])('its representation %s -> %s', (input, expectedResult) => {
         const conversionResult = fizzbuzz(input);
         expect(isSome(conversionResult)).toBeTruthy();
