@@ -5,7 +5,7 @@ export const max = 100;
 
 export type Mapping = Map<number, string>;
 
-let mapping: Mapping = new Map([
+let defaultMapping: Mapping = new Map([
     [15, 'FizzBuzz'],
     [11, 'Bang'],
     [7, 'Whizz'],
@@ -13,12 +13,12 @@ let mapping: Mapping = new Map([
     [5, 'Buzz'],
 ]);
 
-export const fizzbuzz = (input: number): Option<string> =>
+export const fizzbuzz = (input: number, mapping = defaultMapping): Option<string> =>
     isOutOfRange(input)
         ? none
-        : some(convertSafely(input));
+        : some(convertSafely(input, mapping));
 
-function convertSafely(input: number): string {
+function convertSafely(input: number, mapping: Mapping): string {
     for (const [divisor, value] of mapping) {
         if (is(divisor, input)) {
             return value;
