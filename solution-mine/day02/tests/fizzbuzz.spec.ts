@@ -42,7 +42,7 @@ describe('FizzBuzz should return', () => {
         ])],
         [21, 'Whizz', new Map([
             [7, 'Whizz'],
-            [3, 'Fizz'],,
+            [3, 'Fizz'],
         ])],
         [21, 'Fizz', new Map([
             [3, 'Fizz'],
