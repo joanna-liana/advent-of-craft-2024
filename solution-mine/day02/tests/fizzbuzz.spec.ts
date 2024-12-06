@@ -1,4 +1,4 @@
-import {fizzbuzz, max, min} from '../src/fizzbuzz';
+import {fizzbuzz, Mapping, max, min} from '../src/fizzbuzz';
 import * as O from 'fp-ts/Option';
 import {isNone, isSome} from 'fp-ts/Option';
 import * as fc from 'fast-check';
@@ -33,7 +33,7 @@ describe('FizzBuzz should return', () => {
         }
     });
 
-    const CUSTOM_MAPPING_CASES: [number, string, Map<number, string>][] = [
+    const CUSTOM_MAPPING_CASES: [number, string, Mapping][] = [
         [7, 'Whizz', new Map([
             [15, 'FizzBuzz'],
             [7, 'Whizz'],
