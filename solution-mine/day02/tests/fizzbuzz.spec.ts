@@ -33,6 +33,35 @@ describe('FizzBuzz should return', () => {
         }
     });
 
+    const CUSTOM_MAPPING_CASES: [number, string, Map<number, string>][] = [
+        [7, 'Whizz', new Map([
+            [15, 'FizzBuzz'],
+            [7, 'Whizz'],
+            [3, 'Fizz'],
+            [5, 'Buzz'],
+        ])],
+        [21, 'Whizz', new Map([
+            [7, 'Whizz'],
+            [3, 'Fizz'],,
+        ])],
+        [21, 'Fizz', new Map([
+            [3, 'Fizz'],
+            [7, 'Whizz'],
+        ])],
+    ];
+
+    test.each(CUSTOM_MAPPING_CASES)("supports custom mappings in the provided order", (input, expectedResult, mapping) => {
+        // when
+        const conversionResult = fizzbuzz(input, mapping);
+
+        // then
+        expect(isSome(conversionResult)).toBeTruthy();
+
+        if (isSome(conversionResult)) {
+            expect(conversionResult.value).toBe(expectedResult);
+        }
+    })
+
     test('valid strings for numbers between 1 and 100', () => {
         fc.assert(
             fc.property(
