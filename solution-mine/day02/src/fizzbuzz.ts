@@ -5,6 +5,7 @@ export const max = 100;
 
 let mapping: Map<number, string> = new Map([
     [15, 'FizzBuzz'],
+    [11, 'Bang'],
     [7, 'Whizz'],
     [3, 'Fizz'],
     [5, 'Buzz'],
