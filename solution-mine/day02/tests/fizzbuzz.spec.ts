@@ -10,22 +10,20 @@ describe('FizzBuzz should return', () => {
         [67, '67'],
         [82, '82'],
         [3, 'Fizz'],
-        [66, 'Fizz'],
-        [99, 'Fizz'],
+        [6, 'Fizz'],
+        [18, 'Fizz'],
+        [11, 'Bang'],
+        [66, 'Bang'],
+        [99, 'Bang'],
         [5, 'Buzz'],
         [50, 'Buzz'],
         [85, 'Buzz'],
         [15, 'FizzBuzz'],
         [30, 'FizzBuzz'],
         [45, 'FizzBuzz'],
-        // Multiples of 7 are Whizz
-        // Multiples of 11 are Bang
         [7, 'Whizz'],
         [14, 'Whizz'],
         [21, 'Whizz'],
-        // [11, 'Bang'],
-        // [22, 'Bang'],
-        // [33, 'Bang'],
     ])('its representation %s -> %s', (input, expectedResult) => {
         const conversionResult = fizzbuzz(input);
         expect(isSome(conversionResult)).toBeTruthy();
@@ -49,7 +47,7 @@ describe('FizzBuzz should return', () => {
         O.exists(result => validStringsFor(input).includes(result))
     );
 
-    const validStringsFor = (x: number): string[] => ['Fizz', 'Buzz', 'FizzBuzz', 'Whizz', x.toString()];
+    const validStringsFor = (x: number): string[] => ['Fizz', 'Buzz', 'FizzBuzz', 'Whizz', "Bang", x.toString()];
 
     test('none for numbers out of range', () => {
         fc.assert(
