@@ -18,7 +18,9 @@ export class Gift {
 
     public getRecommendedAge(): number {
         const recommendedAge = this.attributes.get('recommendedAge');
-        return recommendedAge ? parseInt(recommendedAge, 10) : 0;
+        const parsedAge = parseInt(recommendedAge, 10);
+
+        return isNaN(parsedAge) ? 0 : parsedAge;
     }
 
     public toString(): string {
