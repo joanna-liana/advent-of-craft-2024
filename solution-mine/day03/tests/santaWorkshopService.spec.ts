@@ -5,12 +5,12 @@ import {Gift} from "../src/gift";
 describe('SantaWorkshopService', () => {
     let service: SantaWorkshopService;
 
-    const validGiftArbitraries = fc.record({
+    const validGiftArbitrariesModel = {
         giftName: fc.string(),
         weight: fc.float({ max: 5 }),
         color: fc.string(),
         material: fc.string(),
-    });
+    };
 
     beforeEach(() => {
         service = new SantaWorkshopService();
@@ -29,7 +29,7 @@ describe('SantaWorkshopService', () => {
 
     it('should prepare a gift with valid weight', () => {
         fc.assert(
-            fc.property(validGiftArbitraries, ({ giftName, weight, color, material }) => {
+            fc.property(fc.record(validGiftArbitrariesModel), ({ giftName, weight, color, material }) => {
                 const gift = service.prepareGift(giftName, weight, color, material);
 
                 return gift instanceof Gift;
@@ -48,10 +48,8 @@ describe('SantaWorkshopService', () => {
 
     it('should throw an error for any gift that is too heavy', () => {
         const giftAttributes = fc.record({
-            giftName: fc.string(),
+            ...validGiftArbitrariesModel,
             weight: fc.float({ min: 5, minExcluded: true }),
-            color: fc.string(),
-            material: fc.string(),
         });
 
         fc.assert(
