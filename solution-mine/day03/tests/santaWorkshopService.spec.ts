@@ -80,4 +80,25 @@ describe('SantaWorkshopService', () => {
 
         expect(gift.getRecommendedAge()).toBe(3);
     });
+
+    it('should add numeric recommended age to the gift', () => {
+        fc.assert(
+            fc.property(
+                validGiftArbitraries,
+                fc.oneof(fc.integer(), fc.float()),
+                ({ giftName, weight, color, material }, recommendedAge) => {
+                // given
+                const gift = service.prepareGift(giftName, weight, color, material);
+                const stringifiedAge = `${recommendedAge}`;
+
+                gift.addAttribute('recommendedAge', stringifiedAge);
+
+                // when, then
+                expect(gift.getRecommendedAge()).toBe(
+                    parseInt(stringifiedAge, 10) // NOTE: this is the same as the implementation
+                );
+            })
+        );
+    });
+
 });
