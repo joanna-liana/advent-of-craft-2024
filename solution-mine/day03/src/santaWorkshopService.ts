@@ -4,7 +4,7 @@ export class SantaWorkshopService {
     private preparedGifts: Gift[] = [];
 
     public prepareGift(giftName: string, weight: number, color: string, material: string): Gift {
-        if (weight > 5) {
+        if (Number.isNaN(weight) || weight > 5) {
             throw new Error('Gift is too heavy for Santa\'s sleigh');
         }
 
