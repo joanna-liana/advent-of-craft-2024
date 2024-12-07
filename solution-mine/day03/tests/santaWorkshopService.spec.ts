@@ -1,3 +1,4 @@
+import * as fc from 'fast-check';
 import {SantaWorkshopService} from "../src/santaWorkshopService";
 import {Gift} from "../src/gift";
 
@@ -17,6 +18,16 @@ describe('SantaWorkshopService', () => {
         const gift = service.prepareGift(giftName, weight, color, material);
 
         expect(gift).toBeInstanceOf(Gift);
+    });
+
+    it('should prepare a gift with valid weight', () => {
+        fc.assert(
+            fc.property(fc.string(), fc.float({ max: 5 }), fc.string(), fc.string(),(giftName, weight, color, material) => {
+                const gift = service.prepareGift(giftName, weight, color, material);
+
+                return gift instanceof Gift;
+            })
+        );
     });
 
     it('should throw an error if gift is too heavy', () => {
