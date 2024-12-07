@@ -69,62 +69,58 @@ describe('SantaWorkshopService', () => {
         );
     });
 
-    it('should add an attribute to a gift', () => {
-        const giftName = 'Furby';
-        const weight = 1;
-        const color = 'Multi';
-        const material = 'Cotton';
+    describe("setting recommended age", () => {
+        let gift: Gift;
 
-        const gift = service.prepareGift(giftName, weight, color, material);
-        gift.addAttribute('recommendedAge', '3');
+        beforeEach(() => {
+            const giftName = 'Furby';
+            const weight = 1;
+            const color = 'Multi';
+            const material = 'Cotton';
 
-        expect(gift.getRecommendedAge()).toBe(3);
-    });
+            gift = service.prepareGift(giftName, weight, color, material);
+        })
 
-    it('should add numeric recommended age to the gift', () => {
-        fc.assert(
-            fc.property(
-                validGiftArbitraries,
-                fc.oneof(fc.integer(), fc.float()),
-                ({ giftName, weight, color, material }, recommendedAge) => {
-                // given
-                const gift = service.prepareGift(giftName, weight, color, material);
-                const stringifiedAge = `${recommendedAge}`;
+        it('should add an attribute to a gift', () => {
+            gift.addAttribute('recommendedAge', '3');
 
-                gift.addAttribute('recommendedAge', stringifiedAge);
+            expect(gift.getRecommendedAge()).toBe(3);
+        });
 
-                // when, then
-                expect(gift.getRecommendedAge()).toBe(
-                    parseInt(stringifiedAge, 10) // NOTE: this is the same as the implementation
-                );
-            })
-        );
-    });
+        it('should add numeric recommended age to the gift', () => {
+            fc.assert(
+                fc.property(fc.oneof(fc.integer(), fc.float()), recommendedAge => {
+                    // given
+                    const stringifiedAge = `${recommendedAge}`;
 
-    it('should treat non-numeric recommended age as 0', () => {
-        const nonNumericArbitrary = fc.string()
-            .filter(value => {
-                const shouldIncludeValue = isNaN(parseInt(value, 10))
+                    gift.addAttribute('recommendedAge', stringifiedAge);
 
-                return shouldIncludeValue;
-            });
+                    // when, then
+                    expect(gift.getRecommendedAge()).toBe(
+                        parseInt(stringifiedAge, 10) // NOTE: this is the same as the implementation
+                    );
+                })
+            )
+        });
+
+        it('should treat non-numeric recommended age as 0', () => {
+            const nonNumericArbitrary = fc.string()
+                .filter(value => {
+                    const shouldIncludeValue = isNaN(parseInt(value, 10))
+
+                    return shouldIncludeValue;
+                });
 
             fc.assert(
-            fc.property(
-                validGiftArbitraries,
-                nonNumericArbitrary,
-                ({ giftName, weight, color, material }, recommendedAge) => {
-                // given
-                const gift = service.prepareGift(giftName, weight, color, material);
+                fc.property(nonNumericArbitrary, recommendedAge => {
+                    // given
+                    gift.addAttribute('recommendedAge', recommendedAge);
 
-                console.log("recommendedAge", recommendedAge)
-
-                gift.addAttribute('recommendedAge', recommendedAge);
-
-                // when, then
-                expect(gift.getRecommendedAge()).toBe(0);
-            }),
-            { verbose: true }
-        );
-    });
+                    // when, then
+                    expect(gift.getRecommendedAge()).toBe(0);
+                }),
+                { verbose: true }
+            );
+        });
+    })
 });
