@@ -39,6 +39,22 @@ describe('SantaWorkshopService', () => {
         expect(() => service.prepareGift(giftName, weight, color, material)).toThrow('Gift is too heavy for Santa\'s sleigh');
     });
 
+    it('should throw an error for any gift that is too heavy', () => {
+        fc.assert(
+            fc.property(fc.string(), fc.float({ min: 5, minExcluded: true }), fc.string(), fc.string(),(giftName, weight, color, material) => {
+                let error: Error | undefined;
+
+                try {
+                    service.prepareGift(giftName, weight, color, material);
+                } catch (err) {
+                    error = err
+                }
+
+                return error!.message === 'Gift is too heavy for Santa\'s sleigh';
+            })
+        );
+    });
+
     it('should add an attribute to a gift', () => {
         const giftName = 'Furby';
         const weight = 1;
