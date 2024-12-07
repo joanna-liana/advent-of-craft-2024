@@ -5,6 +5,13 @@ import {Gift} from "../src/gift";
 describe('SantaWorkshopService', () => {
     let service: SantaWorkshopService;
 
+    const validGiftArbitraries = fc.record({
+        giftName: fc.string(),
+        weight: fc.float({ max: 5 }),
+        color: fc.string(),
+        material: fc.string(),
+    });
+
     beforeEach(() => {
         service = new SantaWorkshopService();
     });
@@ -21,15 +28,8 @@ describe('SantaWorkshopService', () => {
     });
 
     it('should prepare a gift with valid weight', () => {
-        const giftAttributes = fc.record({
-            giftName: fc.string(),
-            weight: fc.float({ max: 5 }),
-            color: fc.string(),
-            material: fc.string(),
-        });
-
         fc.assert(
-            fc.property(giftAttributes, ({ giftName, weight, color, material }) => {
+            fc.property(validGiftArbitraries, ({ giftName, weight, color, material }) => {
                 const gift = service.prepareGift(giftName, weight, color, material);
 
                 return gift instanceof Gift;
@@ -101,4 +101,30 @@ describe('SantaWorkshopService', () => {
         );
     });
 
+    it('should treat non-numeric recommended age as 0', () => {
+        const nonNumericArbitrary = fc.string()
+            .filter(value => {
+                const shouldIncludeValue = isNaN(parseInt(value, 10))
+
+                return shouldIncludeValue;
+            });
+
+            fc.assert(
+            fc.property(
+                validGiftArbitraries,
+                nonNumericArbitrary,
+                ({ giftName, weight, color, material }, recommendedAge) => {
+                // given
+                const gift = service.prepareGift(giftName, weight, color, material);
+
+                console.log("recommendedAge", recommendedAge)
+
+                gift.addAttribute('recommendedAge', recommendedAge);
+
+                // when, then
+                expect(gift.getRecommendedAge()).toBe(0);
+            }),
+            { verbose: true }
+        );
+    });
 });
