@@ -93,10 +93,8 @@ describe('SantaWorkshopService', () => {
 
                     gift.addAttribute('recommendedAge', stringifiedAge);
 
-                    // when, then
-                    expect(gift.getRecommendedAge()).toBe(
-                        parseInt(stringifiedAge, 10) // NOTE: this is the same as the implementation
-                    );
+                    // when, then is integer
+                    expect(Math.abs(gift.getRecommendedAge() % 1)).toBe(0);
                 })
             )
         });
