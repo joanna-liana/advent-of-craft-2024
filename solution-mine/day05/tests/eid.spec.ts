@@ -1,8 +1,25 @@
 class TestEid {
-    private eid = "GBBSSSKK";
+    private _eid = "00000000";
 
     toString() {
         return this.eid;
+    }
+
+    private set eid(value: string) {
+        this._eid  = value;
+
+        this.calculateControlKey();
+    }
+
+    private get eid() {
+        return this._eid;
+    }
+
+    private calculateControlKey() {
+        const eidWithoutControlKey = this.eid.slice(0, -2);
+
+        const controlKey = 97 - (parseInt(eidWithoutControlKey, 10) % 97);
+        this._eid = eidWithoutControlKey + `${controlKey}`.padStart(2, "0")
     }
 
     withGenderCode(code: string) {
@@ -23,18 +40,18 @@ class TestEid {
         return this;
     }
 
-    withKey(key: string) {
-        this.eid = this.eid.slice(0, -2) + key
+    withControlKey(key: string) {
+        this._eid = this.eid.slice(0, -2) + key
 
         return this;
     }
 }
 
-const testEid = new TestEid()
+// TODO: randomise valid values
+const getValidEid = () => new TestEid()
     .withGenderCode("1")
     .withBirthYear("23")
     .withSerial("456")
-    .withKey("78")
     .toString()
 
 describe('EID', () => {
@@ -74,4 +91,16 @@ describe('EID', () => {
         // .each([000, 1000])
         it.todo("rejects EID with invalid serial number")
     });
+
+    describe("control key", () => {
+        it.todo("supports EID with a valid control key")
+
+        // .each([valid - 1, valid + 1])
+        it.todo("rejects EIDs with an invalid control key")
+    });
+
+    describe("invalid length", () => {
+        it.todo("rejects EIDs that are too short")
+        it.todo("rejects EIDs that are too long")
+    })
 });
