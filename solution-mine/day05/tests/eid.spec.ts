@@ -1,6 +1,10 @@
 class TestEid {
     private _eid = "00000000";
 
+    constructor() {
+        this.calculateControlKey();
+    }
+
     toString() {
         return this.eid;
     }
