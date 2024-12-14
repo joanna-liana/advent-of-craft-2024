@@ -66,4 +66,12 @@ describe('EID', () => {
         // .each([-01, 100])
         it.todo("rejects EID with invalid birth year")
     });
+
+    describe("serial number", () => {
+        // .each([001..999])
+        it.todo("supports serial number in limited birth order")
+
+        // .each([000, 1000])
+        it.todo("rejects EID with invalid serial number")
+    });
 });
